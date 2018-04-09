@@ -54,3 +54,14 @@ class ViewTestCase(TestCase):
         )
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertContains(res, "Something new")
+        self.assertNotIn("Go to New York", res)
+
+    def test_api_can_delete_bucketlist(self):
+        # Test the api can delete a bucketlist
+        bucketlist = Bucketlist.objects.get()
+        response = self.client.delete(
+            reverse('details', kwargs={'pk': bucketlist.id}),
+            format='json',
+            follow=True
+        )
+        self.assertEquals(response.status_code, status.HTTP_204_NO_CONTENT)
