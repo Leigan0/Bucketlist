@@ -7,8 +7,10 @@ from .models import Bucketlist
 class BucketlistSerializer(serializers.ModelSerializer):
     #maps the Model instwance into JSON format
 
+    owner = serializers.ReadOnlyField(source='owner.username')
+
     class Meta:
         #Meta class to map serializers fields with the model fields
         model = Bucketlist
-        fields = ('id', 'name', 'date_created', 'date_modified')
+        fields = ('id', 'name', 'owner','date_created', 'date_modified')
         read_only_fields = ('date_created', 'date_modified')
