@@ -13,3 +13,11 @@ class CreateView(generics.ListCreateAPIView): # The ListCreateAPIView is a gener
         serializer.save()
 
 # this class defines the create behaviour of our rest api
+
+#RetrieveUpdateDestroyAPIView is a generic view that provides GET(one),
+#PUT, PATCH and DELETE method handlers.
+
+class DetailsView(generics.RetrieveUpdateDestroyAPIView):
+    # This class handles the http GET, PUT and DELETE requests
+    queryset = Bucketlist.objects.all()
+    serializer_class = BucketlistSerializer
